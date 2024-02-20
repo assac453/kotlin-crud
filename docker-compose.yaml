@@ -1,0 +1,18 @@
+version: "2.9"
+
+services:
+  postgresql:
+    container_name: kotlin-crud
+    image: postgres:14.8-alpine3.18
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "dev"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
