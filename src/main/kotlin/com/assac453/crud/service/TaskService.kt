@@ -20,11 +20,11 @@ class TaskService(var repository: TaskRepository) {
             .map { TaskDTOResponse(id = it.id!!, name = it.name, description = it.description, done = it.done)}
             .getOrNull()
     }
-    fun updateTask(id: Long, old: TaskDTORequest): TaskDTOResponse? {
+    fun updateTask(id: Long, new: TaskDTORequest): TaskDTOResponse? {
         return repository
             .findById(id)
             .map { val save =
-                repository.save(TaskEntity(id = it.id!!, name = it.name, description = it.description, done = !it.done))
+                repository.save(TaskEntity(id = it.id!!, name = new.name, description = new.description, done = new.done))
                 TaskDTOResponse(id = save.id!!, name = save.name, description = save.description, done = save.done)
             }.orElseGet(null)
     }
